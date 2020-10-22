@@ -2,4 +2,5 @@
 
 module CustomExceptions
   class ContentUnavailable < StandardError; end
+  class InvalidUrl < StandardError; end
 end
