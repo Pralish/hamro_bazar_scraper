@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
+require 'net/http'
 class ScraperService
-  include HTTParty
-
   def initialize(url)
     @url = url
     @now = Time.now
@@ -17,7 +16,7 @@ class ScraperService
   attr_reader :url, :now
 
   def scrape
-    content = HTTParty.get(@url)
+    content = Net::HTTP.get_response(URI.parse(@url)).body
     html = Nokogiri::HTML(content)
     details = {
       url: @url,
