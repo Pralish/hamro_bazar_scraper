@@ -7,5 +7,6 @@ class FetchProductJob < ApplicationJob
     scraped_product = ScraperService.new(url).call
 
     product = Product.upsert(scraped_product, unique_by: :url)
+    scraped_product
   end
 end

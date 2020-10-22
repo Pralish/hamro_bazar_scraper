@@ -2,8 +2,8 @@
 
 class ProductsController < ApplicationController
   def index
-    products = Product.all
-    render json: products
+    products = Product.all.order(id: :desc)
+    render json: { data: products, success: true }
   end
 
   def search
@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
     # Fetch record immediately if url is not in database
     @result ||= FetchProductJob.perform_now(params[:search])
 
-    render json: @result
+    render json: { data: @result, success: true }
   end
 
   def auto_refresh
