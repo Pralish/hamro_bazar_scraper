@@ -19,6 +19,7 @@ class ScraperService
   def scrape
     content = URI.open(@url, 'User-Agent' => "Ruby/#{RUBY_VERSION}")
     html = Nokogiri::HTML(content)
+
     if html.at_xpath('//div/b[contains(text(), "Ad expired or removed")]')
       handle_removed_ad
     end
@@ -37,6 +38,7 @@ class ScraperService
 
   def handle_removed_ad
     product = Product.find_by(url: url)
+    # sync removed records from hamro bazaar
     product&.destroy
     raise CustomExceptions::ContentUnavailable, 'The Ad you are looking for is either expired or removed.'
   end
