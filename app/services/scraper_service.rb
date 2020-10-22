@@ -17,7 +17,7 @@ class ScraperService
   attr_reader :url, :now
 
   def scrape
-    content = URI.open(@url, 'User-Agent' => "Ruby/#{RUBY_VERSION}")
+    content = URI.open(@url, 'User-Agent' => 'Ruby/2.6.5')
     html = Nokogiri::HTML(content)
     if html.at_xpath('//div/b[contains(text(), "Ad expired or removed")]')
       handle_removed_ad
