@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
 
   onInput(event: string) {
     if (event) {
+      // clear timer if input change detected
       clearTimeout(this.timeOut);
       this.timeOut = setTimeout(() => {
         this.searchProduct(event);
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
   }
 
   searchProduct(event: string) {
+    clearTimeout(this.timeOut);
     this.errorMsg = '';
     this.cardContent = '';
     if (this.isValidUrl(event)) {

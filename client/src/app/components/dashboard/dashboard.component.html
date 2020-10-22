@@ -1,10 +1,12 @@
 <div class="py-5 w-100">
   <div class="search-bar pb-5">
     <input
+      #search
       class="w-100 px-3"
       type="text"
       (input)="onInput($event.target?.value)"
       placeholder="Enter Hamro Bazar Url"
+      (keyup.enter)="searchProduct(search.value)"
     />
     <div class="alert alert-danger mt-2" role="alert" *ngIf="errorMsg">
       {{ errorMsg }}
