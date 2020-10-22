@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'open-uri'
-
 class ScraperService
+  include HTTParty
+
   def initialize(url)
     @url = url
     @now = Time.now
@@ -17,7 +17,7 @@ class ScraperService
   attr_reader :url, :now
 
   def scrape
-    content = open(@url)
+    content = HTTParty.get(@url)
     html = Nokogiri::HTML(content)
     details = {
       url: @url,
