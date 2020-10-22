@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+class FetchProductJob < ApplicationJob
+  queue_as :default
+
+  def perform(url)
+    scraped_product = ScraperService.new(url).call
+
+    product = Product.upsert(scraped_product, unique_by: :url)
+  end
+end

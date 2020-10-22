@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  url: MyString
+  title: MyString
+  expires_at: 2020-10-21 22:28:36
+  description: MyString
+  mobile: MyString
+  price: MyString
+
+two:
+  url: MyString
+  title: MyString
+  expires_at: 2020-10-21 22:28:36
+  description: MyString
+  mobile: MyString
+  price: MyString
