@@ -15,15 +15,14 @@ export class DashboardComponent implements OnInit {
   cardContent = '';
   constructor(private productService: ProductService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onInput(event: string) {
     if (event) {
       clearTimeout(this.timeOut);
       this.timeOut = setTimeout(() => {
         this.searchProduct(event);
-      }, 500);
+      }, 3000);
     }
   }
 

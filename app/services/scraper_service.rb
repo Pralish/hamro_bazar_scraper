@@ -5,7 +5,7 @@ require 'open-uri'
 class ScraperService
   def initialize(url)
     @url = url
-    @now = Time.now
+    @now = Time.zone.now
   end
 
   def call
@@ -17,7 +17,7 @@ class ScraperService
   attr_reader :url, :now
 
   def scrape
-    content = URI.open(@url, 'User-Agent' => 'Ruby/2.6.5')
+    content = URI.open(@url, 'User-Agent' => "Ruby/#{RUBY_VERSION}")
     html = Nokogiri::HTML(content)
     if html.at_xpath('//div/b[contains(text(), "Ad expired or removed")]')
       handle_removed_ad
@@ -29,8 +29,8 @@ class ScraperService
       price: html.xpath('//td[contains(text(), "Price:")]/../td').last.text,
       description: html.xpath('//td/font/b[contains(text(), "Description")]/../../../../../../../tr').last.text,
       mobile_number: html.xpath('//td[contains(text(), "Mobile Phone:")]/../td').last.children.first.text,
+      expires_at: now + 1.weeks,
       created_at: now,
-      expires_at: now + 1.minutes,
       updated_at: now
     }
   end

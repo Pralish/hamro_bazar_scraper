@@ -19,7 +19,7 @@ class ProductsController < ApplicationController
   end
 
   def auto_refresh
-    return if @result.expires_at < Time.now
+    return if @result.expired?
 
     FetchProductJob.perform_later(params[:search])
   end
